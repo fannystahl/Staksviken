@@ -1,0 +1,416 @@
+// Fanny Ståhl, 2018
+// main.scss for Stäkvikens samfällighet
+
+// Imports
+@import 'reset';
+
+//Variables
+
+    // Colours
+    $blue: #2F56BB;
+    $green: #38DCA1;
+    $red: #F95A45;
+    $white: #FFF9F9;
+    $black: #000;
+
+    // Lines
+    $lines: 1px solid lighten($black, 80%);
+
+    // Fonts
+    $font-serif: 'Merriweather', Georgia,  serif;
+    $font-sans: 'Open Sans', Arial, sans-serif;
+
+    // Media query widths
+    $smallest: 320px;
+    $small: 360px;
+    $tablet: 768px;
+    $desktop: 1024px;
+
+// Mixins
+
+    // Media query mixin
+    @mixin mQ($args...) {
+        @if length($args) == 1 {
+            @media screen and (min-width: nth($args, 1)) {
+                @content;
+            }
+        }
+
+        @if length($args) == 2 {
+            @media screen and (min-width: nth($args, 1)) and (max-width: nth($args, 2)) {
+                @content;
+            }
+        }
+    }
+
+    // Transition mixin
+    @mixin transition($args...) {
+        -webkit-transition: $args;
+        -moz-transition: $args;
+        -ms-transition: $args;
+        -o-transition: $args;
+        transition: $args;
+      }
+
+// Extend placeholders
+%white-box {
+    background-color: $white;
+    border-radius: 10px;
+    color: lighten($black, 35%); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+%button {
+    display: box;
+    background-color: $green;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    color: darken($green, 30%);
+    text-decoration: none;
+}
+
+// Start
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $blue;
+    font-family: $font-sans;
+    font-size: 1.2em;
+    line-height: 1.4;
+    color: $white;
+
+    h1 {
+        font-family: $font-serif;
+        font-size: 2rem;
+        font-weight: normal;
+        margin: 0 0 1.5rem 0;
+    }
+
+    h2 {
+        font-family: $font-serif;
+        font-size: 1.5rem;
+        font-weight: normal;
+        margin: 1rem 0 1rem 0;
+
+        @include mQ($tablet){
+            margin: 0px 0 1rem 0;
+        }
+    }
+
+    h3 {
+        font-weight: normal;
+        color: $black;
+    }
+
+    p {
+        margin: 20px 0;
+    }
+
+    // Layout
+
+    main {
+        clear: both;
+        padding: 1rem;
+
+        p {
+            max-width: 500px;
+        }
+    }
+
+    .left-col {
+        @include mQ($tablet){
+            width: 30%;
+            float: left;
+            margin: 0 5% 0 2%;
+        }
+    }
+    
+    .right-col {
+        @include mQ($tablet){
+            width: 60%;
+            float: left;
+        }
+    }
+
+    #main-footer {
+        clear: both;
+        text-align: center;
+        font-size: 1rem;
+        padding: 2rem 1rem 1rem 1rem;
+    }
+
+    // Main nav
+    header {
+
+        padding: 0.5rem 0 0.5rem 0;
+
+        @include mQ($tablet){
+
+            padding: 1rem;
+
+        }
+
+        #main-nav {
+
+            padding-top: 1rem;
+
+            span {
+                cursor: pointer;
+                font-size: 1.5rem;
+                padding: 1.5rem 0.5rem;
+                margin: 0.8rem;
+                @include transition(font-size 0.5s ease-in-out);
+            }
+
+            span:active {
+                font-size: 1rem;
+            }
+
+            ul {
+                max-height: 0;
+                margin-top: 0.8rem;
+                padding: 1rem 0;
+                overflow: hidden;
+                @include transition(max-height 0.5s ease-in-out);
+            }
+
+            li {
+                padding: 1rem 1.5rem;
+                border-top: 1px solid lighten($blue, 40%);
+                background-color: $white;
+            }
+
+            li a {
+                color: $blue;
+                text-decoration: none;
+            }
+
+            li a:hover {
+                font-weight: bold;
+            }
+
+            .green {
+                color: $green;
+            }
+
+            @include mQ($tablet){
+
+                float: right;
+                padding: 0.5rem;
+
+                span {
+                    display: none;
+                }
+
+                ul {
+                    max-height: 600px;
+                    padding: 0;
+                }
+
+                li {
+                    padding: 0;
+                    display: inline-block;
+                    background-color: transparent;
+                    margin: 0 0.8rem 1rem 0.8rem;
+                    border-top: none;
+                }
+
+                li a {
+                    color: $white;
+                }
+                
+            }
+        }
+
+    }
+
+    // Index page
+
+    .index-class {
+
+        background-image: url(../img/stak_utsikt_small.jpg);
+        background-size: cover;
+        height: 600px;
+
+        @include mQ($tablet){
+            background-image: url(../img/stak_utsikt.jpg);
+            height: 900px;
+        }
+    }
+
+    .index-text {
+
+        padding: 3rem 1rem;
+
+        @include mQ($tablet){
+            float: right;
+            text-align: right;
+            margin: 6rem;
+        }
+    }
+
+    // Reports
+
+    .a-button {
+        @extend %button;
+        text-decoration: none;
+
+        @include mQ($smallest, $small){
+            font-size: 1rem;
+        }
+
+        @include mQ($tablet, 1094px){
+            font-size: 1rem;
+        }
+
+        .fa-angle-double-right {
+            font-size: 2rem;
+            margin-left: 2rem;
+            position: relative;
+            top: 0.3rem;
+
+            @include mQ($smallest, $small){
+                font-size: 1.5rem;
+            }
+
+            @include mQ($tablet, 1094px){
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    .a-button:hover, input[type=submit]:hover {
+        background-color: lighten($green, 10%);
+    }
+
+    .reports {
+        @extend %white-box;
+        margin: 1rem 0;
+        padding: 1rem;
+        max-width: 600px;
+
+        li {
+            padding: 0.5rem 0;
+        }
+
+        .date {
+            float: right;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        .fa-check {
+            color: $green;
+            width: 1.2rem;
+            margin-right: 1rem;
+        }
+
+        .fa-times {
+            color: $red;
+            width: 1.2rem;
+            margin-right: 1rem;
+        }
+        
+    }
+
+    // Dokument
+
+    .documents li {
+        padding: 0.3rem 0;
+    }
+
+    .documents a {
+        text-decoration: none;
+        color: $green;
+    }
+
+    .documents a:hover {
+        text-decoration: underline;
+    }
+
+    // Form
+
+    .form {
+        @extend %white-box;
+        
+        h3 {
+            padding: 1.5rem;
+            border-bottom: $lines;
+            border-top: $lines;
+
+        }
+
+        h3:first-of-type {
+            border-top: none;
+        }
+
+        #form-messages {
+            padding-top: 1rem;
+        }
+
+        #form-messages li {
+            font-size: 1rem;
+            background-color: $red;
+            color: $white;
+            border-radius: 5px;
+            width: 80%;
+            margin: 0.5rem 1.5rem;
+            padding: 0.5rem;
+        }
+
+        .required {
+            color: $red;
+        }
+
+        @include mQ($tablet){
+            max-width: 600px;
+        }
+    }
+
+    label {
+        padding: 1rem 1.5rem;
+        display: block;
+    }
+
+    input[type=text], input[type=date], select, textarea {
+        background-color: $white;
+        margin: 0rem 1rem 1rem 1.5rem;
+        display: block;
+        border-radius: 10px;
+        border: $lines;
+        width: 90%;
+        font-size: 1.2rem;
+        padding: 0.8rem;
+        box-shadow: 0px 2px 4px rgba(50, 50, 50, 0.25);
+    }
+
+    textarea {
+        height: 75px;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    input[type=radio] {
+        margin: 1rem 1rem 1rem 1rem;
+    }
+
+    .radio-div {
+        border-bottom: $lines;
+        padding: 1rem 0;
+    }
+
+    input[type=submit] {
+        @extend %button;
+        border: none;
+        font-size: 1.3rem;
+        cursor: pointer;
+        margin: 2rem 0rem 2rem 1.5rem;
+    }
+}
