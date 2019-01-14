@@ -2,7 +2,15 @@
 // Togglemenu.ts for Stäkvikens Samfällighet
 
 // Variables
-let menuShow: boolean = false;
+if (window.innerWidth >= 768){
+
+    var menuShow: boolean = false;
+
+} else if (window.innerWidth < 768){
+
+    var menuShow: boolean = true;
+
+}
 let menuContent: HTMLElement = document.getElementById("main-nav-ul");
 
 // Event listener to show menu on resize above 768 pixels ,and hide on resize below 768 pixels
