@@ -57,8 +57,6 @@ document.addEventListener("DOMContentLoaded", function(){ // Wait for DOM tree t
                
                 let json = {"fname": fname, "lname": lname, "cdate": cdate, "cpoint": cpoint, "cstatus": cstatus, "ccomment": ccomment};
 
-                console.log("Trying this out");
-
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.open("POST", apiURL, true);
                 xmlhttp.setRequestHeader('Content-Type', 'application/json');
